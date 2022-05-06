@@ -4,14 +4,14 @@ body, app-root {
     height: 100vh;
 }
 
-app-root{
+app-root {
     display: flex;
     flex-direction: column;
 }
 
 pre {
+    font-size: 120%;
     white-space: pre-wrap;
-    font-size: 125%;
 }
 
 
@@ -163,6 +163,7 @@ div.alerta {
     max-width: 400px;
     margin: 1em auto;
     word-wrap: break-word;
+    display: none;
     /* position: absolute;
     top: 0.5em;
     right: 0;
@@ -172,7 +173,7 @@ div.alerta {
     border-radius: 10px; */
 }
 
-div.alerta span {
+div.alerta span#fechar {
     float: right;
     font-size: 1.25em;
     cursor: pointer;
@@ -182,12 +183,14 @@ div.alerta.erro {
     background-color: #ff9f9f;
     color: #660101;
     border-color:#660101;
+    display: block;
 }
 
 div.alerta.sucesso {
     background-color: #afffba;
     color: #006f05;
     border-color: #006f05;
+    display: block;
 }
 
 
@@ -296,6 +299,11 @@ a.botao.disabled {
 
 input, select, button, a.botao {
     font-size: 1em;
+    /* margin: 0 0.25em; */
+}
+
+a.botao, input[type="button"], input[type="submit"] {
+    margin: 0 0.25em;
 }
 
 a.botao.confirmacao.oculto,
@@ -328,7 +336,8 @@ a.botao.finalizar {
     width: 5.5em;
 }
 
-div#comandos a.botao.oculto {
+/* div#comandos a.botao.oculto { */
+app-atendimento-list div#comandos a.botao {
     visibility: hidden;
 }
 

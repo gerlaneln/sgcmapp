@@ -3,12 +3,12 @@ import { Atendimento } from 'src/app/models/atendimento';
 import { IComponentList } from '../i-component-list';
 
 @Component({
-  selector: 'app-agenda-list',
-  templateUrl: './agenda-list.component.html',
+  selector: 'app-atendimento-list',
+  templateUrl: './atendimento-list.component.html',
   styles: [
   ]
 })
-export class AgendaListComponent implements OnInit, IComponentList<Atendimento> {
+export class AtendimentoListComponent implements OnInit, IComponentList<Atendimento> {
 
   constructor() { }
 
