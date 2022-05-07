@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Atendimento } from 'src/app/models/atendimento';
+import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { IComponentList } from '../i-component-list';
 
 @Component({
@@ -10,18 +11,44 @@ import { IComponentList } from '../i-component-list';
 })
 export class AgendaListComponent implements OnInit, IComponentList<Atendimento> {
 
-  constructor() { }
+  constructor(private servico: AtendimentoService) { }
 
   registros: Atendimento[] = Array<Atendimento>();
 
   get(termoBusca?: string): void {
-    throw new Error('Method not implemented.');
+    
+    this.servico.get(termoBusca).subscribe({
+      next: (resposta: Atendimento[]) => {
+        this.registros = resposta.filter(item => {
+          return ['AGENDADO', 'CONFIRMADO'].includes(item.status);
+        });
+      }
+    })
+    
   }
+
   delete(id: number): void {
-    throw new Error('Method not implemented.');
+    if(confirm('Deseja realmente cancelar o agendamento?')){
+      this.servico.delete(id).subscribe({
+        complete: () => {
+          this.get();
+        }
+      })
+    }
+  }
+
+  updateStatus(id: number): void{
+    if(confirm('Confirma alteração no status do agendamento?')){
+      this.servico.updateStatus(id).subscribe({
+        complete: () => {
+          this.get();
+        }
+      })
+    }
   }
 
   ngOnInit(): void {
+    this.get();
   }
 
 }

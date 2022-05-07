@@ -1,3 +1,4 @@
+<app-barra-comandos (eventoBusca)="get($event)"></app-barra-comandos>
 <table>
     <thead>
         <tr>
@@ -19,10 +20,10 @@
             <td>{{r.profissional.unidade.nome}}</td>
             <td>{{r.convenio.nome}}</td>
             <td>
-                <a class="botao chegada" [ngClass]="{'oculto' : r.status == 'AGENDADO'}">Chegada</a>
-                <a class="botao confirmacao" [ngClass]="{'oculto' : r.status == 'CONFIRMADO'}">Confirmação</a>
+                <a (click)="updateStatus(r.id)" class="botao chegada" [ngClass]="{'oculto' : r.status == 'AGENDADO'}">Chegada</a>
+                <a (click)="updateStatus(r.id)" class="botao confirmacao" [ngClass]="{'oculto' : r.status == 'CONFIRMADO'}">Confirmação</a>
                 <a routerLink="/agenda/form" [queryParams]="{id: r.id}" class="botao">Editar</a>
-                <a class="botao cancelar">Cancelar</a>
+                <a (click)="delete(r.id)" class="botao cancelar">Cancelar</a>
             </td>
         </tr>
     </tbody>

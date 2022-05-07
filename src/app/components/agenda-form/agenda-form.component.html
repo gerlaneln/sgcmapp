@@ -4,7 +4,7 @@
         <input type="hidden" name="id" [(ngModel)]="registro.id">
 
         <label for="profissional">Profissional</label>
-        <select [(ngModel)]="registro.profissional" name="profissional" required>
+        <select [(ngModel)]="registro.profissional" name="profissional" [compareWith]="compareById" required>
             <option *ngFor="let item of profissionais" [ngValue]="item">{{item.nome}}</option>
         </select>
 
@@ -29,12 +29,12 @@
         </select>
 
         <label for="convenio">Convênio</label>
-        <select [(ngModel)]="registro.convenio" name="convenio" required>
+        <select [(ngModel)]="registro.convenio" name="convenio" [compareWith]="compareById" required>
             <option *ngFor="let item of convenios" [ngValue]="item">{{item.nome}}</option>
         </select>
 
         <label for="paciente">Paciente</label>
-        <select [(ngModel)]="registro.paciente" name="paciente" required>
+        <select [(ngModel)]="registro.paciente" name="paciente" [compareWith]="compareById" required>
             <option *ngFor="let item of pacientes" [ngValue]="item">{{item.nome}}</option>
         </select>
 
