@@ -13,8 +13,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let r of registros">
-            <td>{{r.data}}</td>
-            <td>{{r.hora}}</td>
+            <td>{{r.data | date:'dd/MM/yyyy'}}</td>
+            <td>{{r.hora | slice:0:5}}</td>
             <td>{{r.paciente.nome}}</td>
             <td>{{r.profissional.nome}}</td>
             <td>{{r.profissional.unidade.nome}}</td>

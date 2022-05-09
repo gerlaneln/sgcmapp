@@ -1,0 +1,32 @@
+<form (ngSubmit)="submit(form)" #form="ngForm">
+    <div class="grid">
+
+        <input type="hidden" name="id" [(ngModel)]="registro.id">
+
+        <label for="nome">Nome</label>
+        <input [(ngModel)]="registro.nome" type="text" name="nome" required>
+
+        <label for="razaoSocial">Razão Social</label>
+        <input [(ngModel)]="registro.razaoSocial" type="text" name="razaoSocial" required>
+
+        <label for="cnpj">CNPJ</label>
+        <input [(ngModel)]="registro.cnpj" type="text" name="cnpj" required>
+
+        <label for="representante">Representante</label>
+        <input [(ngModel)]="registro.representante" type="text" name="representante" required>
+        
+        <label for="email">E-mail</label>
+        <input [(ngModel)]="registro.email" type="text" name="email" required>
+
+        <label for="telefone">Telefone</label>
+        <input [(ngModel)]="registro.telefone" type="text" name="telefone" required>
+
+        <label for="ativo">Ativo</label>
+        <input [(ngModel)]="registro.ativo" type="checkbox" name="ativo">
+
+    </div>
+
+    <input type="button" value="Cancelar" routerLink="../">
+    <input type="submit" value="Salvar" [disabled]="form.invalid">
+    
+</form>

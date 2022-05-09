@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Atendimento } from 'src/app/models/atendimento';
 import { Convenio } from 'src/app/models/convenio';
 import { Paciente } from 'src/app/models/paciente';
@@ -21,6 +21,7 @@ import { IComponentForm } from '../i-component-form';
 export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> {
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private servico: AtendimentoService,
               private servicoProfissional: ProfissionalService,
               private servicoConvenio: ConvenioService,
@@ -34,7 +35,25 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
   compareById = Utils.compareById;
 
   submit(form: NgForm): void {
-    throw new Error('Method not implemented.');
+
+    let data = new Date(this.registro.data);
+    data = new Date(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
+    let registroModificado = Object.assign({}, this.registro);
+    registroModificado.data = data.toISOString();
+
+    if(this.registro.id){
+      this.servico.update(registroModificado).subscribe({
+        complete: () => {
+          this.router.navigate(['/agenda']);
+        }
+      })
+    }else{
+      this.servico.insert(registroModificado).subscribe({
+        complete: () => {
+          form.resetForm();
+        }
+      })
+    }
   }
 
   ngOnInit(): void {
