@@ -23,7 +23,7 @@
             <td>{{r.ativo? 'Ativo': 'Inativo'}}</td>
             <td>
                 <a routerLink="/convenio/form" [queryParams]="{id: r.id}" class="botao">Editar</a>
-                <a (click)="delete(r.id)" class="botao cancelar">Cancelar</a>
+                <a (click)="delete(r.id)" class="botao cancelar">Excluir</a>
             </td>
         </tr>
     </tbody>

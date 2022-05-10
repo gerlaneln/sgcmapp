@@ -20,8 +20,8 @@
             <td>{{r.profissional.unidade.nome}}</td>
             <td>{{r.convenio.nome}}</td>
             <td>
-                <a class="botao iniciar" [ngClass]="{'oculto': r.status == 'ATENDIMENTO'}">Iniciar</a>
-                <a class="botao finalizar" [ngClass]="{'oculto': r.status == 'CHEGADA'}">Finalizar</a>
+                <a (click)="updateStatus(r.id)" class="botao iniciar" [ngClass]="{'oculto': r.status == 'ATENDIMENTO'}">Iniciar</a>
+                <a (click)="updateStatus(r.id)" class="botao finalizar" [ngClass]="{'oculto': r.status == 'CHEGADA'}">Finalizar</a>
             </td>
         </tr>
     </tbody>

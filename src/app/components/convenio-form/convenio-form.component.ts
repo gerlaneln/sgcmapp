@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Convenio } from 'src/app/models/convenio';
 import { ConvenioService } from 'src/app/services/convenio.service';
 import { Utils } from 'src/app/utils/utils';
@@ -15,6 +15,7 @@ import { IComponentForm } from '../i-component-form';
 export class ConvenioFormComponent implements OnInit, IComponentForm<Convenio> {
 
   constructor(private route: ActivatedRoute,
+              private router : Router,
               private servico: ConvenioService
             ) { }
 
@@ -22,7 +23,11 @@ export class ConvenioFormComponent implements OnInit, IComponentForm<Convenio> {
   compareById = Utils.compareById;
   
   submit(form: NgForm): void {
-    throw new Error('Method not implemented.');
+    this.servico.update(this.registro).subscribe({
+      complete: () => {
+        this.router.navigate(['/convenio']);
+      }
+    })
   }
   
   ngOnInit(): void {

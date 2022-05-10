@@ -23,7 +23,13 @@ export class ConvenioListComponent implements OnInit, IComponentList<Convenio> {
     })
   }
   delete(id: number): void {
-    throw new Error('Method not implemented.');
+    if(confirm('Confirma exclusão deste convênio?')){
+      this.servico.delete(id).subscribe({
+        complete: () => {
+          this.get();
+        }
+      })
+    }
   }
 
   ngOnInit(): void {
