@@ -13,6 +13,10 @@ import { ConvenioFormComponent } from './components/convenio-form/convenio-form.
 import { ConvenioListComponent } from './components/convenio-list/convenio-list.component';
 import { ErroInterceptor } from './interceptors/erro.interceptor';
 import { AlertaComponent } from './components/alerta/alerta.component';
+import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
+import { EspecialidadeListComponent } from './components/especialidade-list/especialidade-list.component';
+import { UnidadeListComponent } from './components/unidade-list/unidade-list.component';
+import { UnidadeFormComponent } from './components/unidade-form/unidade-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { AlertaComponent } from './components/alerta/alerta.component';
     BarraComandosComponent,
     ConvenioFormComponent,
     ConvenioListComponent,
-    AlertaComponent
+    AlertaComponent,
+    EspecialidadeFormComponent,
+    EspecialidadeListComponent,
+    UnidadeListComponent,
+    UnidadeFormComponent
   ],
   imports: [
     FormsModule,

@@ -1,33 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Convenio } from 'src/app/models/convenio';
-import { ConvenioService } from 'src/app/services/convenio.service';
-import { Utils } from 'src/app/utils/utils';
+import { Unidade } from 'src/app/models/unidade';
+import { UnidadeService } from 'src/app/services/unidade.service';
 import { IComponentForm } from '../i-component-form';
 
 @Component({
-  selector: 'app-convenio-form',
-  templateUrl: './convenio-form.component.html',
+  selector: 'app-unidade-form',
+  templateUrl: './unidade-form.component.html',
   styles: [
   ]
 })
-export class ConvenioFormComponent implements OnInit, IComponentForm<Convenio> {
+export class UnidadeFormComponent implements OnInit, IComponentForm<Unidade> {
 
   constructor(private route: ActivatedRoute,
-              private router : Router,
-              private servico: ConvenioService
+              private router: Router,
+              private servico: UnidadeService
             ) { }
 
-  registro: Convenio = <Convenio>{};
-  compareById = Utils.compareById;
-  
-  submit(form: NgForm): void {
+  registro: Unidade = <Unidade>{};
 
+  submit(form: NgForm): void {
     if(this.registro.id){
       this.servico.update(this.registro).subscribe({
         complete: () => {
-          this.router.navigate(['/convenio']);
+          this.router.navigate(['config/unidades']);
         }
       })
     }else{
@@ -37,20 +34,18 @@ export class ConvenioFormComponent implements OnInit, IComponentForm<Convenio> {
         }
       })
     }
-    
   }
-  
+
   ngOnInit(): void {
 
     const id = this.route.snapshot.queryParamMap.get('id');
     if(id){
       this.servico.getById(+id).subscribe({
-        next: (resposta: Convenio) => {
+        next: (resposta: Unidade) => {
           this.registro = resposta;
         }
       })
     }
-
   }
 
 }
