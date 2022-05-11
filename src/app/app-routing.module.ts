@@ -7,19 +7,33 @@ import { ConvenioFormComponent } from './components/convenio-form/convenio-form.
 import { ConvenioListComponent } from './components/convenio-list/convenio-list.component';
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { EspecialidadeListComponent } from './components/especialidade-list/especialidade-list.component';
+import { LoginComponent } from './components/login/login.component';
 import { UnidadeFormComponent } from './components/unidade-form/unidade-form.component';
 import { UnidadeListComponent } from './components/unidade-list/unidade-list.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { AutenticacaoGuard } from './services/autenticacao.guard';
 
 const routes: Routes = [
-  { path: 'agenda', component: AgendaListComponent },
-  { path: 'agenda/form', component: AgendaFormComponent },
-  { path: 'atendimento', component: AtendimentoListComponent },
-  { path: 'convenio', component: ConvenioListComponent },
-  { path: 'convenio/form', component: ConvenioFormComponent },
-  { path: 'config/especialidades', component: EspecialidadeListComponent },
-  { path: 'config/especialidades/form', component: EspecialidadeFormComponent },
-  { path: 'config/unidades', component: UnidadeListComponent },
-  { path: 'config/unidades/form', component: UnidadeFormComponent }
+  {
+    path: '', canActivate: [AutenticacaoGuard], children: [
+      { path: 'agenda', component: AgendaListComponent },
+      { path: 'agenda/form', component: AgendaFormComponent },
+      { path: 'atendimento', component: AtendimentoListComponent },
+      { path: 'convenio', component: ConvenioListComponent },
+      { path: 'convenio/form', component: ConvenioFormComponent },
+      { path: 'config', canActivate: [AutenticacaoGuard], data: {papel: "ROLE_ADMIN"}, children: [
+        { path: 'usuarios', component: UsuarioComponent},
+        { path: 'especialidades', component: EspecialidadeListComponent },
+        { path: 'especialidades/form', component: EspecialidadeFormComponent },
+        { path: 'unidades', component: UnidadeListComponent },
+        { path: 'unidades/form', component: UnidadeFormComponent }
+      ]}
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: ''}
+  
+  
 ];
 
 @NgModule({

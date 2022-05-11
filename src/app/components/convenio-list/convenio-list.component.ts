@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Convenio } from 'src/app/models/convenio';
+import { AlertaService } from 'src/app/services/alerta.service';
 import { ConvenioService } from 'src/app/services/convenio.service';
 import { IComponentList } from '../i-component-list';
 
@@ -11,7 +12,9 @@ import { IComponentList } from '../i-component-list';
 })
 export class ConvenioListComponent implements OnInit, IComponentList<Convenio> {
 
-  constructor(private servico: ConvenioService) { }
+  constructor(private servico: ConvenioService,
+              private servicoAlerta: AlertaService
+            ) { }
 
   registros: Convenio[] = Array<Convenio>();
 
@@ -27,6 +30,7 @@ export class ConvenioListComponent implements OnInit, IComponentList<Convenio> {
       this.servico.delete(id).subscribe({
         complete: () => {
           this.get();
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }

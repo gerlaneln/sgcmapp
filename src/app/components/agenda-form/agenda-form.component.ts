@@ -5,6 +5,7 @@ import { Atendimento } from 'src/app/models/atendimento';
 import { Convenio } from 'src/app/models/convenio';
 import { Paciente } from 'src/app/models/paciente';
 import { Profissional } from 'src/app/models/profissional';
+import { AlertaService } from 'src/app/services/alerta.service';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ConvenioService } from 'src/app/services/convenio.service';
 import { PacienteService } from 'src/app/services/paciente.service';
@@ -22,6 +23,7 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private servicoAlerta: AlertaService,
               private servico: AtendimentoService,
               private servicoProfissional: ProfissionalService,
               private servicoConvenio: ConvenioService,
@@ -45,12 +47,14 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
       this.servico.update(registroModificado).subscribe({
         complete: () => {
           this.router.navigate(['/agenda']);
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }else{
       this.servico.insert(registroModificado).subscribe({
         complete: () => {
           form.resetForm();
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }

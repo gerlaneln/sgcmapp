@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Especialidade } from 'src/app/models/especialidade';
+import { AlertaService } from 'src/app/services/alerta.service';
 import { EspecialidadeService } from 'src/app/services/especialidade.service';
 import { IComponentList } from '../i-component-list';
 
@@ -11,7 +12,9 @@ import { IComponentList } from '../i-component-list';
 })
 export class EspecialidadeListComponent implements OnInit, IComponentList<Especialidade> {
 
-  constructor(private servico: EspecialidadeService) { }
+  constructor(private servico: EspecialidadeService,
+              private servicoAlerta: AlertaService
+            ) { }
 
   registros: Especialidade[] = Array<Especialidade>();
 
@@ -27,6 +30,7 @@ export class EspecialidadeListComponent implements OnInit, IComponentList<Especi
       this.servico.delete(id).subscribe({
         complete: () => {
           this.get();
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }

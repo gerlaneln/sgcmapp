@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Unidade } from 'src/app/models/unidade';
+import { AlertaService } from 'src/app/services/alerta.service';
 import { UnidadeService } from 'src/app/services/unidade.service';
 import { IComponentList } from '../i-component-list';
 
@@ -11,7 +12,9 @@ import { IComponentList } from '../i-component-list';
 })
 export class UnidadeListComponent implements OnInit, IComponentList<Unidade> {
 
-  constructor(private servico: UnidadeService) { }
+  constructor(private servico: UnidadeService,
+              private servicoAlerta: AlertaService
+            ) { }
 
   registros: Unidade[] = Array<Unidade>();
 
@@ -27,6 +30,7 @@ export class UnidadeListComponent implements OnInit, IComponentList<Unidade> {
       this.servico.delete(id).subscribe({
         complete: () => {
           this.get();
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }

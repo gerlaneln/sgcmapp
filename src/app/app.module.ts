@@ -17,6 +17,9 @@ import { EspecialidadeFormComponent } from './components/especialidade-form/espe
 import { EspecialidadeListComponent } from './components/especialidade-list/especialidade-list.component';
 import { UnidadeListComponent } from './components/unidade-list/unidade-list.component';
 import { UnidadeFormComponent } from './components/unidade-form/unidade-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { RequisicaoInterceptor } from './interceptors/requisicao.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { UnidadeFormComponent } from './components/unidade-form/unidade-form.com
     EspecialidadeFormComponent,
     EspecialidadeListComponent,
     UnidadeListComponent,
-    UnidadeFormComponent
+    UnidadeFormComponent,
+    LoginComponent,
+    UsuarioComponent
   ],
   imports: [
     FormsModule,
@@ -40,7 +45,8 @@ import { UnidadeFormComponent } from './components/unidade-form/unidade-form.com
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErroInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErroInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RequisicaoInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Unidade } from 'src/app/models/unidade';
+import { AlertaService } from 'src/app/services/alerta.service';
 import { UnidadeService } from 'src/app/services/unidade.service';
 import { IComponentForm } from '../i-component-form';
 
@@ -15,7 +16,8 @@ export class UnidadeFormComponent implements OnInit, IComponentForm<Unidade> {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private servico: UnidadeService
+              private servico: UnidadeService,
+              private servicoAlerta: AlertaService
             ) { }
 
   registro: Unidade = <Unidade>{};
@@ -25,12 +27,14 @@ export class UnidadeFormComponent implements OnInit, IComponentForm<Unidade> {
       this.servico.update(this.registro).subscribe({
         complete: () => {
           this.router.navigate(['config/unidades']);
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }else{
       this.servico.insert(this.registro).subscribe({
         complete: () => {
           form.resetForm();
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }

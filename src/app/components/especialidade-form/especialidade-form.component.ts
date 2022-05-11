@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Especialidade } from 'src/app/models/especialidade';
+import { AlertaService } from 'src/app/services/alerta.service';
 import { EspecialidadeService } from 'src/app/services/especialidade.service';
 import { IComponentForm } from '../i-component-form';
 
@@ -15,7 +16,8 @@ export class EspecialidadeFormComponent implements OnInit, IComponentForm<Especi
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private servico: EspecialidadeService      
+              private servico: EspecialidadeService,
+              private servicoAlerta: AlertaService      
             ) { }
 
   registro: Especialidade = <Especialidade>{};
@@ -25,12 +27,14 @@ export class EspecialidadeFormComponent implements OnInit, IComponentForm<Especi
       this.servico.update(this.registro).subscribe({
         complete: () => {
           this.router.navigate(['config/especialidades']);
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }else{
       this.servico.insert(this.registro).subscribe({
         complete: () => {
           form.resetForm();
+          this.servicoAlerta.enviarAlertaSucesso();
         }
       })
     }
