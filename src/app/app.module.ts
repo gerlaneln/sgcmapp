@@ -18,8 +18,8 @@ import { EspecialidadeListComponent } from './components/especialidade-list/espe
 import { UnidadeListComponent } from './components/unidade-list/unidade-list.component';
 import { UnidadeFormComponent } from './components/unidade-form/unidade-form.component';
 import { LoginComponent } from './components/login/login.component';
-import { UsuarioComponent } from './components/usuario/usuario.component';
 import { RequisicaoInterceptor } from './interceptors/requisicao.interceptor';
+import { ProfissionalSelecaoComponent } from './components/profissional-selecao/profissional-selecao.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { RequisicaoInterceptor } from './interceptors/requisicao.interceptor';
     UnidadeListComponent,
     UnidadeFormComponent,
     LoginComponent,
-    UsuarioComponent
+    ProfissionalSelecaoComponent
   ],
   imports: [
     FormsModule,

@@ -10,7 +10,6 @@ import { EspecialidadeListComponent } from './components/especialidade-list/espe
 import { LoginComponent } from './components/login/login.component';
 import { UnidadeFormComponent } from './components/unidade-form/unidade-form.component';
 import { UnidadeListComponent } from './components/unidade-list/unidade-list.component';
-import { UsuarioComponent } from './components/usuario/usuario.component';
 import { AutenticacaoGuard } from './services/autenticacao.guard';
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
       { path: 'convenio', component: ConvenioListComponent },
       { path: 'convenio/form', component: ConvenioFormComponent },
       { path: 'config', canActivate: [AutenticacaoGuard], data: {papel: "ROLE_ADMIN"}, children: [
-        { path: 'usuarios', component: UsuarioComponent},
         { path: 'especialidades', component: EspecialidadeListComponent },
         { path: 'especialidades/form', component: EspecialidadeFormComponent },
         { path: 'unidades', component: UnidadeListComponent },
