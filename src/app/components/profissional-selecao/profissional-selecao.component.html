@@ -1,4 +1,4 @@
 <label for="profissional">Selecione o profissional</label>
-<select [(ngModel)]="profissional" name="profissional" (ngModelChange)="filtrar(profissional)">
+<select [(ngModel)]="profissional" name="profissional" (change)="filtrar(profissional)">
     <option *ngFor="let item of profissionais" [ngValue]="item">{{item.nome}}</option>
 </select>

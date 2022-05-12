@@ -29,15 +29,16 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
               private servicoConvenio: ConvenioService,
               private servicoPaciente: PacienteService
             ) { }
+
   horariosClinica: String[] = ['14:00:00', '14:30:00',
                     '15:00:00', '15:30:00',
                     '16:00:00', '16:30:00',
                     '17:00:00', '17:30:00',
                     '18:00:00', '18:30:00',
                     '19:00:00', '19:30:00',
-                    '20:00:00']; 
-  horarios: String[] = Array<String>();
-  horariosDisponiveis: String[] = Array<String>();
+                    '20:00:00']; //Horários de atendimento da clínica
+
+  horariosDisponiveis: String[] = Array<String>(); //Array que controla o campo de hora no formulário
   registro: Atendimento = <Atendimento>{};
   profissionais: Profissional[] = Array<Profissional>();
   convenios: Convenio[] = Array<Convenio>();
@@ -45,22 +46,34 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
   compareById = Utils.compareById;
   compareHorario = Utils.compareHorario;
 
-  // let r1 = [2,4,6,8];
-  // let r2 = [3,4,5,7,9];       
-  // let r3 = r1.filter( a => !r2.includes( a ) );
+  carregarHoras(profissional_id: number, data: string): void{ //(change) do campo data
+    console.log("Entrei carregaHoras");
+    this.getHorarios(profissional_id, data);
+  }
 
-  // List<String> registros = atendimentos.stream()
-  // .filter(item -> item.getStatus() != EStatusAtendimento.CANCELADO)
-  // .map(item -> item.getHora().toString())
-  // .collect(Collectors.toList());
-
-  horariosPermitidos(hClinica: String[], hProfissional: String[]): String[]{
+  horariosPermitidos(hClinica: String[], hIndisponivel: String[]): String[]{ //Retorna um Array com as horas disponíveis
+    this.horariosDisponiveis = [];
     hClinica.forEach(item => {
-      if(!hProfissional.includes(item) || item == this.registro.hora){
-         this.horariosDisponiveis.push(item);
+      if(!hIndisponivel.includes(item) || item == this.registro.hora){ //Se não tiver dentro das horas indisponíveis ou se for o horário atual do atendimento
+        console.log("Item "+item);
+        this.horariosDisponiveis.push(item);
       }
     });
     return this.horariosDisponiveis;
+  }
+
+  getHorarios(id: number, dataString: string): void {
+    let data = new Date(dataString);
+    data = new Date(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
+    console.log("Transformação da data "+data.toISOString().slice(0, 10));
+    this.servico.getHorarios(id, data.toISOString().slice(0, 10)).subscribe({
+      next: (resposta: String[]) => {
+        this.horariosDisponiveis = this.horariosPermitidos(this.horariosClinica, resposta);
+        console.log("Horários da clínica "+this.horariosClinica);
+        console.log("Resposta da api "+resposta);
+        console.log("Horários disponíveis "+this.horariosDisponiveis);
+      }
+    })
   }
 
   submit(form: NgForm): void {
@@ -87,20 +100,7 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
     }
   }
 
-  getHorarios(id: number, dataString: string): void {
-    let data = new Date(dataString);
-    data = new Date(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
-    this.servico.getHorarios(id, data.toISOString().slice(0, 10)).subscribe({
-      next: (resposta: String[]) => {
-        this.horarios = this.horariosPermitidos(this.horariosClinica, resposta);
-        console.log(this.horarios);
-      }
-    })
-  }
-
   ngOnInit(): void {
-
-    console.log(this.horarios);
 
     this.servicoProfissional.get().subscribe({
       next: (resposta: Profissional[]) => {
@@ -125,9 +125,12 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
       this.servico.getById(+id).subscribe({
         next: (resposta: Atendimento) => {
           this.registro = resposta;
-          this.getHorarios(this.registro.id, this.registro.data);
+          this.getHorarios(this.registro.profissional.id, this.registro.data);
+          console.log("getHorarios no Init");
         }
       })
+    }else{
+      this.horariosDisponiveis = this.horariosClinica;
     }
 
   }

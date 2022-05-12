@@ -50,16 +50,16 @@ export class AtendimentoService implements ICrudService<Atendimento>{
     return this.http.get<Atendimento[]>(url);
   }
 
-  setFiltro(id: number){
+  setFiltro(id: number){ //Coloca o id no storage
     sessionStorage.setItem('id_profissional', id.toString());
   }
 
-  getFiltro(): number{
+  getFiltro(): number{ //Pega o id no storage
     let id = (Number(sessionStorage.getItem('id_profissional')));
     return id;
   }
 
-  getHorarios(profissional_id: number, data: string): Observable<String[]>{
+  getHorarios(profissional_id: number, data: string): Observable<String[]>{ //Pega os atendimentos filtrados por profissional
     let url = this.apiUrl+ 'horarios/profissional/'+profissional_id+'/data/'+data;
     return this.http.get<String[]>(url);
   }

@@ -4,15 +4,16 @@
         <input type="hidden" name="id" [(ngModel)]="registro.id">
 
         <label for="profissional">Profissional</label>
-        <select [(ngModel)]="registro.profissional" name="profissional" [compareWith]="compareById" required>
+        <select [(ngModel)]="registro.profissional" name="profissional" [compareWith]="compareById" required> 
+            <!-- Precisa de uma condição de change, dispara erro na adição porque não tem data ainda -->
             <option *ngFor="let item of profissionais" [ngValue]="item">{{item.nome}}</option>
         </select>
 
         <label for="data">Data</label>
-        <input [(ngModel)]="registro.data" type="date" name="data" required>
+        <input [(ngModel)]="registro.data" type="date" name="data" (change)="carregarHoras(registro.profissional.id, registro.data)" required>
 
         <label for="hora">Hora</label>
-        <select [(ngModel)]="registro.hora" name="hora" [compareWith]="compareHorario" required>
+        <select [(ngModel)]="registro.hora" name="hora" [compareWith]="compareById" required>
             <option *ngFor="let item of horariosDisponiveis" name="hora" [ngValue]="item">{{item.slice(0,5)}}</option>
         </select>
 

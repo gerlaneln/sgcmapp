@@ -18,7 +18,7 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
 
   registros: Atendimento[] = Array<Atendimento>();
 
-  filtrar(id: number): void{
+  filtrar(id: number): void{ //Pega os atendimentos filtrados por profissional
     this.servico.filtrar(id).subscribe({
       next: (resposta: Atendimento[]) => {
         this.registros = resposta;
@@ -60,9 +60,9 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
 
   ngOnInit(): void {
 
-    let id_profissional = this.servico.getFiltro();
+    let id_profissional = this.servico.getFiltro(); //Pega o valor salvo no storage
     console.log(id_profissional);
-    if(id_profissional !== null){
+    if(id_profissional > 0){
       console.log(id_profissional);
       this.filtrar(id_profissional);
     }
