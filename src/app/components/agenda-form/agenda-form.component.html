@@ -12,20 +12,8 @@
         <input [(ngModel)]="registro.data" type="date" name="data" required>
 
         <label for="hora">Hora</label>
-        <select [(ngModel)]="registro.hora" name="hora" required>
-            <option value="14:00:00">14:00</option>
-            <option value="14:30:00">14:30</option>
-            <option value="15:00:00">15:00</option>
-            <option value="15:30:00">15:30</option>
-            <option value="16:00:00">16:00</option>
-            <option value="16:30:00">16:30</option>
-            <option value="17:00:00">17:00</option>
-            <option value="17:30:00">17:30</option>
-            <option value="18:00:00">18:00</option>
-            <option value="18:30:00">18:30</option>
-            <option value="19:00:00">19:00</option>
-            <option value="19:30:00">19:30</option>
-            <option value="20:00:00">20:00</option>
+        <select [(ngModel)]="registro.hora" name="hora" [compareWith]="compareHorario" required>
+            <option *ngFor="let item of horariosDisponiveis" name="hora" [ngValue]="item">{{item.slice(0,5)}}</option>
         </select>
 
         <label for="convenio">Convênio</label>

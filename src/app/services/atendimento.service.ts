@@ -58,4 +58,9 @@ export class AtendimentoService implements ICrudService<Atendimento>{
     let id = (Number(sessionStorage.getItem('id_profissional')));
     return id;
   }
+
+  getHorarios(profissional_id: number, data: string): Observable<String[]>{
+    let url = this.apiUrl+ 'horarios/profissional/'+profissional_id+'/data/'+data;
+    return this.http.get<String[]>(url);
+  }
 }

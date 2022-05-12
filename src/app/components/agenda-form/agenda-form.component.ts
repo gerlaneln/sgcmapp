@@ -29,12 +29,39 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
               private servicoConvenio: ConvenioService,
               private servicoPaciente: PacienteService
             ) { }
-
+  horariosClinica: String[] = ['14:00:00', '14:30:00',
+                    '15:00:00', '15:30:00',
+                    '16:00:00', '16:30:00',
+                    '17:00:00', '17:30:00',
+                    '18:00:00', '18:30:00',
+                    '19:00:00', '19:30:00',
+                    '20:00:00']; 
+  horarios: String[] = Array<String>();
+  horariosDisponiveis: String[] = Array<String>();
   registro: Atendimento = <Atendimento>{};
   profissionais: Profissional[] = Array<Profissional>();
   convenios: Convenio[] = Array<Convenio>();
   pacientes: Paciente[] = Array<Paciente>();
   compareById = Utils.compareById;
+  compareHorario = Utils.compareHorario;
+
+  // let r1 = [2,4,6,8];
+  // let r2 = [3,4,5,7,9];       
+  // let r3 = r1.filter( a => !r2.includes( a ) );
+
+  // List<String> registros = atendimentos.stream()
+  // .filter(item -> item.getStatus() != EStatusAtendimento.CANCELADO)
+  // .map(item -> item.getHora().toString())
+  // .collect(Collectors.toList());
+
+  horariosPermitidos(hClinica: String[], hProfissional: String[]): String[]{
+    hClinica.forEach(item => {
+      if(!hProfissional.includes(item) || item == this.registro.hora){
+         this.horariosDisponiveis.push(item);
+      }
+    });
+    return this.horariosDisponiveis;
+  }
 
   submit(form: NgForm): void {
 
@@ -60,7 +87,20 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
     }
   }
 
+  getHorarios(id: number, dataString: string): void {
+    let data = new Date(dataString);
+    data = new Date(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
+    this.servico.getHorarios(id, data.toISOString().slice(0, 10)).subscribe({
+      next: (resposta: String[]) => {
+        this.horarios = this.horariosPermitidos(this.horariosClinica, resposta);
+        console.log(this.horarios);
+      }
+    })
+  }
+
   ngOnInit(): void {
+
+    console.log(this.horarios);
 
     this.servicoProfissional.get().subscribe({
       next: (resposta: Profissional[]) => {
@@ -85,6 +125,7 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
       this.servico.getById(+id).subscribe({
         next: (resposta: Atendimento) => {
           this.registro = resposta;
+          this.getHorarios(this.registro.id, this.registro.data);
         }
       })
     }
