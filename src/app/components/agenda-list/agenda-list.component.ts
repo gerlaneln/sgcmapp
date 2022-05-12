@@ -18,8 +18,15 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
 
   registros: Atendimento[] = Array<Atendimento>();
 
+  filtrar(id: number): void{
+    this.servico.filtrar(id).subscribe({
+      next: (resposta: Atendimento[]) => {
+        this.registros = resposta;
+      }
+    })
+  }
+
   get(termoBusca?: string): void {
-    
     this.servico.get(termoBusca).subscribe({
       next: (resposta: Atendimento[]) => {
         this.registros = resposta.filter(item => {
@@ -27,7 +34,6 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
         });
       }
     })
-    
   }
 
   delete(id: number): void {
@@ -53,7 +59,15 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
   }
 
   ngOnInit(): void {
+
+    let id_profissional = this.servico.getFiltro();
+    console.log(id_profissional);
+    if(id_profissional !== null){
+      console.log(id_profissional);
+      this.filtrar(id_profissional);
+    }
     this.get();
+    
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Profissional } from 'src/app/models/profissional';
-import { FiltrarService } from 'src/app/services/filtrar.service';
+import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ProfissionalService } from 'src/app/services/profissional.service';
 
 @Component({
@@ -13,17 +13,17 @@ import { ProfissionalService } from 'src/app/services/profissional.service';
 export class ProfissionalSelecaoComponent implements OnInit {
 
   constructor(private servicoProfissional: ProfissionalService,
-              private servicoFiltro: FiltrarService
+              private servicoAtendimento: AtendimentoService
               ) { }
   
   profissional: Profissional = <Profissional>{};
   profissionais: Profissional[] = Array<Profissional>();
 
-  @Output() eventoFiltro = new EventEmitter();
+  // @Output() eventoFiltro = new EventEmitter();
 
-  filtrar(form: NgForm): void{
-    console.log(this.profissional);
-    this.eventoFiltro.emit(this.profissional.id);
+  filtrar(profissional: Profissional): void{
+    let filtroId = profissional.id;
+    this.servicoAtendimento.setFiltro(filtroId);
   }
 
   ngOnInit(): void {

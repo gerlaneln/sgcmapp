@@ -44,4 +44,18 @@ export class AtendimentoService implements ICrudService<Atendimento>{
     let url = this.apiUrl + 'status/' + id;
     return this.http.put<Atendimento>(url, null);
   }
+
+  filtrar(id: number): Observable<Atendimento[]>{
+    let url = this.apiUrl + 'filtrar/profissional/' + id;
+    return this.http.get<Atendimento[]>(url);
+  }
+
+  setFiltro(id: number){
+    sessionStorage.setItem('id_profissional', id.toString());
+  }
+
+  getFiltro(): number{
+    let id = (Number(sessionStorage.getItem('id_profissional')));
+    return id;
+  }
 }
