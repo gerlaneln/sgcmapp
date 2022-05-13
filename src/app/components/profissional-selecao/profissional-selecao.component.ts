@@ -19,9 +19,15 @@ export class ProfissionalSelecaoComponent implements OnInit {
   profissional: Profissional = <Profissional>{};
   profissionais: Profissional[] = Array<Profissional>();
 
-  filtrar(profissional: Profissional): void{
+  setFiltro(profissional: Profissional): void{
     let filtroId = profissional.id;
     this.servicoAtendimento.setFiltro(filtroId);
+  }
+
+  @Output() eventoFiltro = new EventEmitter();
+
+  filtrar(profissional_id: number): void{
+    this.eventoFiltro.emit(profissional_id);
   }
 
   ngOnInit(): void {

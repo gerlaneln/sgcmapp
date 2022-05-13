@@ -1,4 +1,7 @@
-<label for="profissional">Selecione o profissional</label>
-<select [(ngModel)]="profissional" name="profissional" (change)="filtrar(profissional)">
-    <option *ngFor="let item of profissionais" [ngValue]="item">{{item.nome}}</option>
-</select>
+<form>
+    <label for="profissional">Selecione o profissional</label>
+    <select [(ngModel)]="profissional" name="profissional" (change)="setFiltro(profissional)">
+        <option *ngFor="let item of profissionais" [ngValue]="item">{{item.nome}}</option>
+    </select>
+    <input type="submit" (click)="filtrar(profissional.id)" value="Filtrar">
+</form>

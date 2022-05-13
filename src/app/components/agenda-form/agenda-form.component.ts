@@ -44,7 +44,6 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
   convenios: Convenio[] = Array<Convenio>();
   pacientes: Paciente[] = Array<Paciente>();
   compareById = Utils.compareById;
-  compareHorario = Utils.compareHorario;
 
   carregarHoras(profissional_id: number, data: string): void{ //(change) do campo data
     console.log("Entrei carregaHoras");
