@@ -27,6 +27,7 @@ export class ProfissionalSelecaoComponent implements OnInit {
   @Output() eventoFiltro = new EventEmitter();
 
   filtrar(profissional_id: number): void{
+    this.servicoAtendimento.setFiltro(profissional_id);
     this.eventoFiltro.emit(profissional_id);
   }
 

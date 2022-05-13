@@ -19,11 +19,16 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
   registros: Atendimento[] = Array<Atendimento>();
 
   filtrar(id: number): void{ //Pega os atendimentos filtrados por profissional
-    this.servico.filtrar(id).subscribe({
+    if(id == -1){
+      this.get();
+    }else{
+      this.servico.filtrar(id).subscribe({
       next: (resposta: Atendimento[]) => {
         this.registros = resposta;
       }
     })
+    }
+    
   }
 
   get(termoBusca?: string): void {
@@ -65,8 +70,10 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
     if(id_profissional > 0){
       console.log(id_profissional);
       this.filtrar(id_profissional);
+    }else{
+      this.get();
     }
-    this.get();
+    
     
   }
 

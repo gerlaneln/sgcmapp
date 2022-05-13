@@ -13,7 +13,7 @@
         <input [(ngModel)]="registro.data" type="date" name="data" (change)="carregarHoras(registro.profissional.id, registro.data)" required>
 
         <label for="hora">Hora</label>
-        <select [(ngModel)]="registro.hora" name="hora" [compareWith]="compareById" required>
+        <select [(ngModel)]="registro.hora" name="hora" [compareWith]="compareHorario" required>
             <option *ngFor="let item of horariosDisponiveis" name="hora" [ngValue]="item">{{item.slice(0,5)}}</option>
         </select>
 

@@ -44,9 +44,9 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
   convenios: Convenio[] = Array<Convenio>();
   pacientes: Paciente[] = Array<Paciente>();
   compareById = Utils.compareById;
+  compareHorario = Utils.compareHorario;
 
   carregarHoras(profissional_id: number, data: string): void{ //(change) do campo data
-    console.log("Entrei carregaHoras");
     this.getHorarios(profissional_id, data);
   }
 
@@ -54,7 +54,6 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
     this.horariosDisponiveis = [];
     hClinica.forEach(item => {
       if(!hIndisponivel.includes(item) || item == this.registro.hora){ //Se não tiver dentro das horas indisponíveis ou se for o horário atual do atendimento
-        console.log("Item "+item);
         this.horariosDisponiveis.push(item);
       }
     });
@@ -68,9 +67,6 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
     this.servico.getHorarios(id, data.toISOString().slice(0, 10)).subscribe({
       next: (resposta: String[]) => {
         this.horariosDisponiveis = this.horariosPermitidos(this.horariosClinica, resposta);
-        console.log("Horários da clínica "+this.horariosClinica);
-        console.log("Resposta da api "+resposta);
-        console.log("Horários disponíveis "+this.horariosDisponiveis);
       }
     })
   }

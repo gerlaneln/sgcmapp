@@ -4,4 +4,8 @@ export class Utils {
         return a && b && a.id === b.id;
     }
 
+    static compareHorario(a: any, b: any):boolean {
+        return a && b;
+    }
+
 }
