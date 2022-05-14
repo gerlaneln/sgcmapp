@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Profissional } from 'src/app/models/profissional';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
@@ -30,6 +30,8 @@ export class ProfissionalSelecaoComponent implements OnInit {
     this.servicoAtendimento.setFiltro(profissional_id);
     this.eventoFiltro.emit(profissional_id);
   }
+
+  @Input() id: number = -1;
 
   ngOnInit(): void {
 

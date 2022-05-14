@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Atendimento } from 'src/app/models/atendimento';
+import { Profissional } from 'src/app/models/profissional';
 import { AlertaService } from 'src/app/services/alerta.service';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
+import { ProfissionalService } from 'src/app/services/profissional.service';
 import { IComponentList } from '../i-component-list';
 
 @Component({
@@ -13,12 +15,16 @@ import { IComponentList } from '../i-component-list';
 export class AgendaListComponent implements OnInit, IComponentList<Atendimento> {
 
   constructor(private servico: AtendimentoService,
-              private servicoAlerta: AlertaService
+              private servicoAlerta: AlertaService,
+              private servicoProfissional: ProfissionalService
             ) { }
 
   registros: Atendimento[] = Array<Atendimento>();
+  profissional: Profissional = <Profissional>{};
+  profissionalId: number = -1;
 
   filtrar(id: number): void{ //Pega os atendimentos filtrados por profissional
+    this.profissionalId = id;
     if(id == -1){
       this.get();
     }else{
@@ -30,6 +36,14 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
     }
     
   }
+
+  // getProfissional(id: number): void {
+  //   this.servicoProfissional.getById(id).subscribe({
+  //     next: (resposta: Profissional) => {
+  //       this.profissional = resposta;
+  //     }
+  //   })
+  // }
 
   get(termoBusca?: string): void {
     this.servico.get(termoBusca).subscribe({
