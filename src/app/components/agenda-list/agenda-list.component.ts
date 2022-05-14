@@ -29,21 +29,15 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
       this.get();
     }else{
       this.servico.filtrar(id).subscribe({
-      next: (resposta: Atendimento[]) => {
-        this.registros = resposta;
-      }
+        next: (resposta: Atendimento[]) => {
+          this.registros = resposta.filter(item => {
+            return ['AGENDADO', 'CONFIRMADO'].includes(item.status);
+          });
+        }
     })
     }
     
   }
-
-  // getProfissional(id: number): void {
-  //   this.servicoProfissional.getById(id).subscribe({
-  //     next: (resposta: Profissional) => {
-  //       this.profissional = resposta;
-  //     }
-  //   })
-  // }
 
   get(termoBusca?: string): void {
     this.servico.get(termoBusca).subscribe({
@@ -80,9 +74,8 @@ export class AgendaListComponent implements OnInit, IComponentList<Atendimento> 
   ngOnInit(): void {
 
     let id_profissional = this.servico.getFiltro(); //Pega o valor salvo no storage
-    console.log(id_profissional);
     if(id_profissional > 0){
-      console.log(id_profissional);
+      this.profissionalId = id_profissional;
       this.filtrar(id_profissional);
     }else{
       this.get();

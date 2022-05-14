@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Profissional } from 'src/app/models/profissional';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ProfissionalService } from 'src/app/services/profissional.service';
+import { Utils } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-profissional-selecao',
@@ -18,6 +19,7 @@ export class ProfissionalSelecaoComponent implements OnInit {
   
   profissional: Profissional = <Profissional>{};
   profissionais: Profissional[] = Array<Profissional>();
+  compareById = Utils.compareById;
 
   setFiltro(profissional: Profissional): void{
     let filtroId = profissional.id;
@@ -33,13 +35,31 @@ export class ProfissionalSelecaoComponent implements OnInit {
 
   @Input() id: number = -1;
 
+  
+  getProfissional(id: number): void {
+    if (id != -1) {
+      this.servicoProfissional.getById(id).subscribe({
+        next: (resposta: Profissional) => {
+          this.profissional = resposta;
+        }
+      })
+    } else {
+      this.profissional = <Profissional>{};
+    }
+
+  }
+
   ngOnInit(): void {
 
+    if (this.id != -1) {
+      this.getProfissional(this.id);
+    }
     this.servicoProfissional.get().subscribe({
       next: (resposta: Profissional[]) => {
         this.profissionais = resposta;
       }
     })
+
   }
 
 }
