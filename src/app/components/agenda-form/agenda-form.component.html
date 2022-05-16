@@ -4,8 +4,8 @@
         <input type="hidden" name="id" [(ngModel)]="registro.id">
 
         <label for="profissional">Profissional</label>
-        <select [(ngModel)]="registro.profissional" name="profissional" [compareWith]="compareById" required> 
-            <!-- Precisa de uma condição de change, dispara erro na adição porque não tem data ainda -->
+        <select [(ngModel)]="registro.profissional" name="profissional" (change)="edicaoHorario(registro.profissional.id)" [compareWith]="compareById" required>
+            <!-- Se na edição de atendimento, for mudado o profissional, mas não a data, essa função manda para a função carregar horas o id do novo profissional e a hora já salva no atendimento -->
             <option *ngFor="let item of profissionais" [ngValue]="item">{{item.nome}}</option>
         </select>
 

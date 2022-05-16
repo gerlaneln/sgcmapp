@@ -46,6 +46,14 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
   compareById = Utils.compareById;
   compareHorario = Utils.compareHorario;
 
+  edicaoHorario(profissional_id: number):void{
+    //se na edição de atendimento, for feita a troca de profissional, os horários serão recarregados para a data selecionada
+    if(this.registro.data){
+      this.carregarHoras(profissional_id, this.registro.data);
+    }
+
+  }
+  
   carregarHoras(profissional_id: number, data: string): void{ //(change) do campo data
     this.getHorarios(profissional_id, data);
   }
