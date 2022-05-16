@@ -63,7 +63,6 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
   getHorarios(id: number, dataString: string): void {
     let data = new Date(dataString);
     data = new Date(data.getTime() + data.getTimezoneOffset() * 60 * 1000);
-    console.log("Transformação da data "+data.toISOString().slice(0, 10));
     this.servico.getHorarios(id, data.toISOString().slice(0, 10)).subscribe({
       next: (resposta: String[]) => {
         this.horariosDisponiveis = this.horariosPermitidos(this.horariosClinica, resposta);
@@ -121,7 +120,6 @@ export class AgendaFormComponent implements OnInit, IComponentForm<Atendimento> 
         next: (resposta: Atendimento) => {
           this.registro = resposta;
           this.getHorarios(this.registro.profissional.id, this.registro.data);
-          console.log("getHorarios no Init");
         }
       })
     }else{
