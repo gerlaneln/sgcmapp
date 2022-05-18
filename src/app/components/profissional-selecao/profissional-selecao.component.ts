@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Profissional } from 'src/app/models/profissional';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ProfissionalService } from 'src/app/services/profissional.service';

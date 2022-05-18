@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Atendimento } from 'src/app/models/atendimento';
 import { Profissional } from 'src/app/models/profissional';
 import { AlertaService } from 'src/app/services/alerta.service';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
-import { ProfissionalService } from 'src/app/services/profissional.service';
 import { IComponentList } from '../i-component-list';
 
 @Component({
@@ -15,8 +14,7 @@ import { IComponentList } from '../i-component-list';
 export class AgendaListComponent implements OnInit, IComponentList<Atendimento> {
 
   constructor(private servico: AtendimentoService,
-              private servicoAlerta: AlertaService,
-              private servicoProfissional: ProfissionalService
+              private servicoAlerta: AlertaService
             ) { }
 
   registros: Atendimento[] = Array<Atendimento>();
