@@ -154,6 +154,21 @@ nav div#dropdown_conteudo a {
 
 }
 
+/* Seleção de profissional */
+
+div.selectProf{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+div.selectProf input.cancelar {
+    background-color: #c42626;
+}
+
+div.selectProf input.cancelar:hover {
+    background-color: #811b1b;
+}
+
 
 /* Alerta */
 
