@@ -8,6 +8,10 @@ import { ConvenioListComponent } from './components/convenio-list/convenio-list.
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { EspecialidadeListComponent } from './components/especialidade-list/especialidade-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { PacienteFormComponent } from './components/paciente-form/paciente-form.component';
+import { PacienteListComponent } from './components/paciente-list/paciente-list.component';
+import { ProfissionalFormComponent } from './components/profissional-form/profissional-form.component';
+import { ProfissionalListComponent } from './components/profissional-list/profissional-list.component';
 import { UnidadeFormComponent } from './components/unidade-form/unidade-form.component';
 import { UnidadeListComponent } from './components/unidade-list/unidade-list.component';
 import { AutenticacaoGuard } from './services/autenticacao.guard';
@@ -20,6 +24,10 @@ const routes: Routes = [
       { path: 'atendimento', component: AtendimentoListComponent },
       { path: 'convenio', component: ConvenioListComponent },
       { path: 'convenio/form', component: ConvenioFormComponent },
+      { path: 'profissionais', component: ProfissionalListComponent },
+      { path: 'profissionais/form', component: ProfissionalFormComponent },
+      { path: 'pacientes', component: PacienteListComponent },
+      { path: 'pacientes/form', component: PacienteFormComponent },
       { path: 'config', canActivate: [AutenticacaoGuard], data: {papel: "ROLE_ADMIN"}, children: [
         { path: 'especialidades', component: EspecialidadeListComponent },
         { path: 'especialidades/form', component: EspecialidadeFormComponent },

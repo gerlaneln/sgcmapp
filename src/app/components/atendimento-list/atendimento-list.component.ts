@@ -60,7 +60,7 @@ export class AtendimentoListComponent implements OnInit, IComponentList<Atendime
 
   ngOnInit(): void {
     let id_profissional = this.servico.getFiltro(); //Pega o valor salvo no storage
-    if(id_profissional > 0){
+    if(id_profissional >= 0){
       this.profissionalId = id_profissional;
       this.filtrar(id_profissional);
     }else{

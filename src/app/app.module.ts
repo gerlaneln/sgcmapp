@@ -20,6 +20,10 @@ import { UnidadeFormComponent } from './components/unidade-form/unidade-form.com
 import { LoginComponent } from './components/login/login.component';
 import { RequisicaoInterceptor } from './interceptors/requisicao.interceptor';
 import { ProfissionalSelecaoComponent } from './components/profissional-selecao/profissional-selecao.component';
+import { ProfissionalFormComponent } from './components/profissional-form/profissional-form.component';
+import { ProfissionalListComponent } from './components/profissional-list/profissional-list.component';
+import { PacienteFormComponent } from './components/paciente-form/paciente-form.component';
+import { PacienteListComponent } from './components/paciente-list/paciente-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { ProfissionalSelecaoComponent } from './components/profissional-selecao/
     UnidadeListComponent,
     UnidadeFormComponent,
     LoginComponent,
-    ProfissionalSelecaoComponent
+    ProfissionalSelecaoComponent,
+    ProfissionalFormComponent,
+    ProfissionalListComponent,
+    PacienteFormComponent,
+    PacienteListComponent
   ],
   imports: [
     FormsModule,

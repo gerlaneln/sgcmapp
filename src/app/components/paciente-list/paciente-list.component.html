@@ -1,0 +1,39 @@
+<app-barra-comandos (eventoBusca)="get($event)"></app-barra-comandos>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>Data de Nascimento</th>
+            <th>Grupo Sanguíneo</th>
+            <th>Sexo</th>
+            <th>Endereço</th>
+            <th>CEP</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of registros">
+            <td>{{r.nome}}</td>
+            <td>{{r.email}}</td>
+            <td>{{r.telefone}}</td>
+            <td>{{r.dataNascimento | date:'dd/MM/yyyy'}}</td>
+            <td>{{r.grupoSanguineo | i18nSelect: grupoSanguineo}}</td>
+            <td>{{r.sexo}}</td>
+            <td>{{r.endereco}}</td>
+            <td>{{r.cep}}</td>
+            <td>{{r.cidade}}</td>
+            <td>{{r.estado}}</td>
+            <td>
+                <a routerLink="./form/" [queryParams]="{id: r.id}" class="botao">Editar</a>
+                <a (click)="delete(r.id)" class="botao cancelar">Excluir</a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <td colspan="11">Total de registros: {{registros?.length}}</td>
+    </tfoot>
+</table>
