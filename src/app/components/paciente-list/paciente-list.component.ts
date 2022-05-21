@@ -18,11 +18,11 @@ export class PacienteListComponent implements OnInit, IComponentList<Paciente> {
 
   registros: Paciente[] = Array<Paciente>();
 
-  grupoSanguineo : any = 
-  {'A_POSITIVO': 'A+', 'A_NEGATIVO': 'A-',
-  'B_POSITIVO': 'B+', 'B_NEGATIVO': 'B-',
-  'AB_POSITIVO': 'AB+', 'AB_NEGATIVO': 'AB-',
-  'O_POSITIVO': 'O+', 'O_NEGATIVO': 'O-'};
+  grupoSanguineo : any = {'A_POSITIVO': 'A+', 'A_NEGATIVO': 'A-',
+                          'B_POSITIVO': 'B+', 'B_NEGATIVO': 'B-',
+                          'AB_POSITIVO': 'AB+', 'AB_NEGATIVO': 'AB-',
+                          'O_POSITIVO': 'O+', 'O_NEGATIVO': 'O-'
+                        };
 
   get(termoBusca?: string): void {
     this.servico.get(termoBusca).subscribe({

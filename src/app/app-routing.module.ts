@@ -14,6 +14,8 @@ import { ProfissionalFormComponent } from './components/profissional-form/profis
 import { ProfissionalListComponent } from './components/profissional-list/profissional-list.component';
 import { UnidadeFormComponent } from './components/unidade-form/unidade-form.component';
 import { UnidadeListComponent } from './components/unidade-list/unidade-list.component';
+import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
+import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
 import { AutenticacaoGuard } from './services/autenticacao.guard';
 
 const routes: Routes = [
@@ -32,7 +34,9 @@ const routes: Routes = [
         { path: 'especialidades', component: EspecialidadeListComponent },
         { path: 'especialidades/form', component: EspecialidadeFormComponent },
         { path: 'unidades', component: UnidadeListComponent },
-        { path: 'unidades/form', component: UnidadeFormComponent }
+        { path: 'unidades/form', component: UnidadeFormComponent },
+        { path: 'usuarios', component: UsuarioListComponent },
+        { path: 'usuarios/form', component: UsuarioFormComponent }
       ]}
     ]
   },

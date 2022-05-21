@@ -24,6 +24,8 @@ import { ProfissionalFormComponent } from './components/profissional-form/profis
 import { ProfissionalListComponent } from './components/profissional-list/profissional-list.component';
 import { PacienteFormComponent } from './components/paciente-form/paciente-form.component';
 import { PacienteListComponent } from './components/paciente-list/paciente-list.component';
+import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
+import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { PacienteListComponent } from './components/paciente-list/paciente-list.
     ProfissionalFormComponent,
     ProfissionalListComponent,
     PacienteFormComponent,
-    PacienteListComponent
+    PacienteListComponent,
+    UsuarioListComponent,
+    UsuarioFormComponent
   ],
   imports: [
     FormsModule,
